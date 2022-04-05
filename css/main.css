@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+    background-image: linear-gradient(to left, pink, whitesmoke) ; /*Aplicación del gradiente de color blanco a rosa*/
+}
+header h1{
+    text-align: center;
+}
+
+nav ul{
+    /*Ubica el menu en el centro con FLEX (en vez de lo que habiamos visto de in line block*/
+    display: flex;
+    justify-content: center;
+    
+}
+nav ul li{
+    list-style: none;
+    margin: 1rem; /*Son 16px*/
+    padding: 0.3rem;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+}
+/* Transformaciones o transuciones al menu, con la pseudoclase hover. Todo lo que hago con el hover ocurre cuando paso el cursor.
+EL HOVER solo sirve para DESKTOP no sirver para celulares porque no hay un cursor
+*/
+
+nav ul li:hover{
+    background-color: pink; /*con esto cambia de color cuando paso el cursor*/
+    transform: scale(1.2); /* aca hace un aumento en cuanto yo paso el cursor*/
+    transform: rotate(5deg); /*Con esto hago una rotación*/
+    transform: translate(10px, 20px); /*Esto permite que se mueva 10px a la derecha y 20 hacia abajo. */
+    box-shadow: 10px 10px pink; /*Esto es para darle sombra*/
+    /*Al haber puesto tantas propiedades no se ven todas y se van pisando un poco. */
+}
+
+/* TRANSFORMACIONES IMAGENES */
+img:hover{
+    transform: scale(1.5); /*Para que se acerque la imagen*/
+    transform: rotate(30deg);
+}
+
+/*COn las TRANSICIONES se logra que el efecto de la transformación sea más sutil. Para eso está la propiedad transición y se combina con las transformaciones y con el HOVER. Estas transiciones se miden en segundos normalmente*/
+
+img{
+    transition: 1s; /*Para que la imagen escale con una transición de 1 segundos o que roten, segun la propiedad que uso en el hover*/
+}
+.mainNosotros{
+    display: grid;
+    grid-template-areas: "mainP mainP"
+                         "imagen1 imagen2"
+                         "imagen3 imagen4"
+                         "parrafo parrafo";
+    justify-content: center;
+}
+
+.sectionNosotros{
+    display:none; /*Esto es para que no se vea la imagen grande en el dispositivo movil*/
+}
+.mainP{
+    text-align: center;
+    grid-area: mainP;
+}
+.imagen1{
+    grid-area: imagen1;
+}
+.imagen2{
+    grid-area: imagen2;
+}
+.imagen3{
+    grid-area: imagen3;
+}
+.imagen4{
+    grid-area: imagen4;
+}
+.imagen1, .imagen2, .imagen3, .imagen4{
+    padding: 0.8rem;
+   
+}
+.parrafo{
+    grid-area: parrafo;
+    text-align: center;
+}
+
+
+/* EJEMPLO DE ANIMACION DE LA LUNA EN LOOP y PROPIEDAD KEYFRAME */
+.imgLuna{
+    width: 30%;
+    animation-name: girar; /*con esto lo conecto con el keyframe de abajo*/
+    animation-iteration-count: infinite; /*Aca le digo como es la iteración. Si es con infinito queda en loop por infinitas veces*/
+    animation-duration: 100s;  /* Cuanto quiero que tarde la luna en girar. La velocidad de rotacion  */
+}
+
+@keyframes girar {
+    /*le digo como quiero que empiece a moverse y como quiero que termine*/
+    from{
+        transform: rotate(0); /*Si quisiera que aumente podría hacer lo mismo con scale from 1 to 1.5 por ejemplo*/
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+footer p{
+    text-align: center;
+}
+
+/* DECLARACION DE MEDIA QUERIES - Esto sirve para tener otros diseños según el tamaño de la pantalla. Lo primero que vimos es para celulares hasta 400. Ahora lo aumanetamos a 600px. Es decir lo siguiente es solo para pantallas mayores a 600px. Para probar antes de empezar a trabajar recomienda poner un background color distinto para ver si responde a medida que achicamos o agrandamos la pantalla.
+
+Todo lo que yo no declaro en esta nueva media query me lo toma de arriba. Entonces no es que tengo que ir copiado y pegando. En nuestro diseño solo cambia el main entonces es eso lo que vamos a cambiar
+*/
+@media only screen and (min-width:600px){
+    .mainNosotros{
+        display: grid;
+        grid-template-areas: "mainP mainP mainP mainP"
+                             "sectionNosotros sectionNosotros sectionNosotros sectionNosotros"
+                             "imagen1 imagen2 imagen3 imagen4"
+                             "parrafo parrafo parrafo parrafo";
+        justify-content: center;
+
+        /*Las areas individuales ahora no las trabajo porque ya las trabaje arriba. Solo cambio la clase padre para reacomodar los objetos*/
+    }
+
+
+
+.sectionNosotros{
+    display: block; /*Esto es para que me muestre la imagen que bloqueamos en la pantalla de celular*/
+    grid-area: sectionNosotros; /*Es el único área que defino porque las otras ya las tengo arriba*/
+    display: flex;
+    justify-content: center;
+    align-items: center; /*Este me centra la imagen dentro del contenedor*/
+}
+.mainP, .parrafo{ /*Aca estoy dandole estilo a dos secciones distintas separando sólo con coma las clases*/
+    font-size: 1.3rem; /*Agrando un poco la letra para cuando aumenta la pantalla*/
+}
+
+
+main div img{ /*Para cambiar el tamaño de las imagenes en la pantalla de tablet*/
+    width: 80%;
+}
+}
+
+/* AHORA VAMOS A LA PANTALLA DE COMPUTADORA  */
+@media only screen and (min-width:1024px){
+    .mainNosotros{
+        display: grid;
+        grid-template-areas: "mainP mainP sectionNosotros sectionNosotros"
+                             "imagen1 imagen2 imagen3 imagen4"
+                             "parrafo parrafo parrafo parrafo";
+        justify-content: center;
+
+        /*Las areas individuales ahora no las trabajo porque ya las trabaje arriba. Solo cambio la clase padre para reacomodar los objetos*/
+        align-items: center;
+    }
+   
+
+}
+
